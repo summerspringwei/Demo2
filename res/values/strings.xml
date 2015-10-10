@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Demo2</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
+    <string name="title_activity_about">关于作者</string>
+    <string name="author_info">作者：夏春伟</string>
+    <string name="title_activity_set_course">设置</string>
+    <string name="select_weekDay_text">请选择星期</string>
+    <string name="select_course_text">请选择第几节</string>
+    <string name="select_location_text">地点</string>
+    <string name="select_courseName_text">课程名称</string>
+    <string name="select_teacherName_text">老师姓名</string>
+    <string name="save">保存</string>
+    <string name="toast_save">课程保存成功</string>
+    
+    
+	<string name="Monday">星期一</string>
+	<string name="Tuesday">星期二</string>
+	<string name="Wednesday">星期三</string>
+	<string name="Thursday">星期四</string>
+	<string name="Friday">星期五</string>
+	<string name="Saturday">星期六</string>
+	<string name="Sunday">星期日</string>
+</resources>
