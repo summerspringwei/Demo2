@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">Demo2</string>
     <string name="hello_world">Hello world!</string>
@@ -17,6 +18,14 @@
     <string name="toast_save">课程保存成功</string>
     
     
+    
+    <!-- Android系统提供了对简单的HTML标签的支持，方便开发者设置格式化的文本内容，比如斜体、粗体等。用XML的CDATA标记， 如下所示： -->
+    <string name="lorem_ipsum"><![CDATA[<p>以下为课程详细信息</p>第几节]]></string>
+	<string name="title_template_step">星期<xliff:g id="step_number">%1$s</xliff:g></string>
+	<string name="action_previous">Previous</string>
+	<string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+	
 	<string name="Monday">星期一</string>
 	<string name="Tuesday">星期二</string>
 	<string name="Wednesday">星期三</string>
