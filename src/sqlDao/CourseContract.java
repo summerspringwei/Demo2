@@ -1,4 +1,4 @@
-package com.demo2;
+package sqlDao;
 
 import android.provider.BaseColumns;
 

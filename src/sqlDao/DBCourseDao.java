@@ -1,4 +1,4 @@
-package com.demo2;
+package sqlDao;
 
 import java.util.ArrayList;
 import java.util.List;

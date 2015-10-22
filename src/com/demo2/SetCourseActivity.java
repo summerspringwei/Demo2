@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import sqlDao.Course;
+import sqlDao.DBCourseDao;
 
 public class SetCourseActivity extends Activity {
 
@@ -142,7 +144,7 @@ public class SetCourseActivity extends Activity {
          
         //定义下拉通知栏时要展现的内容信息
         Context context = getApplicationContext();
-        Intent notificationIntent = new Intent(this, SetCourseActivity.class);
+        Intent notificationIntent = new Intent(this, null);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
         notification.setLatestEventInfo(context, contentTitle, contentText,
