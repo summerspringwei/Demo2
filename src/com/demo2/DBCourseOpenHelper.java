@@ -14,8 +14,8 @@ public class DBCourseOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL("create table course(weekDay int,courseId int,courseName varchar(20)"
-				+ ",location varchar(20),teacherName varchar(20) primary key(weekDay,CourseId)");
+		db.execSQL("create table course(weekDay int,courseId int,courseName varchar(64)"
+				+ ",location varchar(64),teacherName varchar(64), primary key(weekDay,CourseId))");
 	}
 
 	@Override
