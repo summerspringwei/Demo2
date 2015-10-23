@@ -16,4 +16,10 @@ public class Course {
 		this.location=l;
 	}
 	
+	@Override
+	public String toString(){
+		String s=weekDay+" "+courseId+" "+courseName+" "+teacherName+" "+location;
+		return s;
+	}
+	
 }

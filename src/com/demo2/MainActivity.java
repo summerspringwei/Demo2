@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
 
-	private static final int NUM_PAGES=7;
+	protected static final int NUM_PAGES=7;
 	/**
 	 * pager 控件，用来处理动画和允许水平滑动来获得之前和之后的页面
 	 */

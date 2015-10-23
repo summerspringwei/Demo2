@@ -144,7 +144,7 @@ public class SetCourseActivity extends Activity {
          
         //定义下拉通知栏时要展现的内容信息
         Context context = getApplicationContext();
-        Intent notificationIntent = new Intent(this, null);
+        Intent notificationIntent = new Intent(this, SetCourseActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
         notification.setLatestEventInfo(context, contentTitle, contentText,

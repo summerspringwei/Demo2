@@ -1,11 +1,17 @@
 package com.demo2;
 
+import java.util.List;
+
 import android.app.Fragment;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import sqlDao.Course;
+import sqlDao.DBCourseDao;
 
 public class ScreenSlidePageFragment extends Fragment{
 
@@ -16,7 +22,7 @@ public class ScreenSlidePageFragment extends Fragment{
 	/**
 	 * 这个框架的页面的数量，
 	 */
-	private int mPageNumber;
+	private int mPageNumber=0;
 	
 	public ScreenSlidePageFragment(){};
 	
@@ -44,7 +50,22 @@ public class ScreenSlidePageFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){
 		ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_screen_slide, container, false);
-		((TextView)(rootView.findViewById(android.R.id.text1))).setText(getString(R.string.title_template_step,mPageNumber+1));
+		DBCourseDao dbCouse=new DBCourseDao(getActivity());
+		List<Course> courseList=dbCouse.queryAll();
+		String s_course="";
+		String []hanzi2num={"一","二","三","四","五","六","日"};
+		((TextView)(rootView.findViewById(R.id.weekday))).setText("星期"+hanzi2num[mPageNumber]);
+		Log.v("PageNumber", ""+mPageNumber);
+		for(int j=0;j<courseList.size();j++){
+			Course c=courseList.get(j);
+			Log.v("course", c.toString());
+			if(c.weekDay==mPageNumber+1){
+				s_course+=c.toString()+"\n";
+			}
+		}
+		((TextView)(rootView.findViewById(R.id.courseDetail))).setText(s_course);
+		s_course="";
+		
 		return rootView;
 	}
 	

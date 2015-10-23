@@ -3,6 +3,7 @@ package sqlDao;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,6 +21,20 @@ public class DBCourseDao {
 	 * 插入一条数据,如果数据已经存在，则更新
 	 * */
 	public void save(Course course){
+		ContentValues values=new ContentValues();
+		values.put("weekDay", course.weekDay);
+		values.put("courseId", course.courseId);
+		values.put("courseName", course.courseName);
+		values.put("location", course.location);
+		values.put("teacherName", course.teacherName);
+		SQLiteDatabase db=dbCourseOpenHelper.getReadableDatabase();
+		long ret=db.insert("course", null, values);
+		if(ret==-1){
+			String whereClause="where weekDay="+course.weekDay+" and courseId="+course.courseId;
+			db.update("course", values,whereClause , null);
+		}
+	}
+/*	public void save(Course course){
 		SQLiteDatabase db=dbCourseOpenHelper.getReadableDatabase();
 		Cursor c=db.rawQuery("select * from course where weekDay="+course.weekDay
 				+" and courseId="+course.courseId, null);
@@ -35,7 +50,7 @@ public class DBCourseDao {
 		}
 		db.close();
 		Log.v("DB save", "save success"+course.courseName);
-	}
+	}*/
 	
 	/*
 	 * 删除数据
