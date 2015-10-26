@@ -30,8 +30,11 @@ public class DBCourseDao {
 		SQLiteDatabase db=dbCourseOpenHelper.getReadableDatabase();
 		long ret=db.insert("course", null, values);
 		if(ret==-1){
-			String whereClause="where weekDay="+course.weekDay+" and courseId="+course.courseId;
-			db.update("course", values,whereClause , null);
+			String updateSql="update course set courseName=\""+course.courseName+
+					"\",location=\""+course.location+"\",teacherName=\""+course.teacherName
+					+"\" where weekDay="+course.weekDay+" and courseId="+course.courseId;
+			db.execSQL(updateSql);
+			Log.v("update", course.toString());
 		}
 	}
 /*	public void save(Course course){

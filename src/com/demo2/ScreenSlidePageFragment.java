@@ -1,5 +1,7 @@
 package com.demo2;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.Fragment;
@@ -9,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import sqlDao.Course;
 import sqlDao.DBCourseDao;
@@ -23,6 +27,8 @@ public class ScreenSlidePageFragment extends Fragment{
 	 * 这个框架的页面的数量，
 	 */
 	private int mPageNumber=0;
+	ListView list_course=null;
+	String []str_course=null;
 	
 	public ScreenSlidePageFragment(){};
 	
@@ -52,19 +58,36 @@ public class ScreenSlidePageFragment extends Fragment{
 		ViewGroup rootView=(ViewGroup)inflater.inflate(R.layout.fragment_screen_slide, container, false);
 		DBCourseDao dbCouse=new DBCourseDao(getActivity());
 		List<Course> courseList=dbCouse.queryAll();
-		String s_course="";
+		Collections.sort(courseList, new Comparator<Course>() {
+
+			@Override
+			public int compare(Course lhs, Course rhs) {
+				// TODO Auto-generated method stub
+				return (lhs.getOrder()<rhs.getOrder()?1:0);
+			}
+		});
+		
+		//获取ListView
+		list_course=(ListView)rootView.findViewById(R.id.listview_course);
+		//声明Adapter
+		ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1);
+		TextView text_weekDay=(TextView)rootView.findViewById(R.id.weekday);
+		
 		String []hanzi2num={"一","二","三","四","五","六","日"};
-		((TextView)(rootView.findViewById(R.id.weekday))).setText("星期"+hanzi2num[mPageNumber]);
+		text_weekDay.setText(getString(R.string.week)+hanzi2num[mPageNumber]);
 		Log.v("PageNumber", ""+mPageNumber);
 		for(int j=0;j<courseList.size();j++){
 			Course c=courseList.get(j);
 			Log.v("course", c.toString());
 			if(c.weekDay==mPageNumber+1){
-				s_course+=c.toString()+"\n";
+				//Adapter增加数据
+				myAdapter.add(c.toString().substring(1));
 			}
 		}
-		((TextView)(rootView.findViewById(R.id.courseDetail))).setText(s_course);
-		s_course="";
+		//设置Adapter
+		list_course.setAdapter(myAdapter);
+		//清空Adapter 。。不需要清空~每个fragment的数据是单独的
+		//myAdapter.clear();
 		
 		return rootView;
 	}

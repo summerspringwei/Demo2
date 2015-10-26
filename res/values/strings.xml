@@ -2,12 +2,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">Demo2</string>
+    <string name="app_name">课程表</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">设置</string>
     <string name="action_about">关于</string>
     <string name="title_activity_about">关于作者</string>
-    <string name="author_info">作者：夏春伟</string>
+    <string name="author_info">作者：夏春伟\n
+        	邮箱：xiachunwei@tju.edu.cn\n
+        	电话：13672086100
+        </string>
     <string name="title_activity_set_course">设置</string>
     <string name="select_weekDay_text">请选择星期</string>
     <string name="select_course_text">请选择第几节</string>
@@ -16,7 +19,7 @@
     <string name="select_teacherName_text">老师姓名</string>
     <string name="save">保存</string>
     <string name="toast_save">课程保存成功</string>
-    
+    <string name="course_term_info">时间\t\t课程名称\t\t地点\t\t教师姓名</string>
     
     
     <!-- Android系统提供了对简单的HTML标签的支持，方便开发者设置格式化的文本内容，比如斜体、粗体等。用XML的CDATA标记， 如下所示： -->
@@ -26,6 +29,7 @@
 	<string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
 	
+    <string name="week">星期</string>
 	<string name="Monday">星期一</string>
 	<string name="Tuesday">星期二</string>
 	<string name="Wednesday">星期三</string>

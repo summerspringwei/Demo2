@@ -21,5 +21,8 @@ public class Course {
 		String s=weekDay+" "+courseId+" "+courseName+" "+teacherName+" "+location;
 		return s;
 	}
+	public int getOrder(){
+		return weekDay*7+courseId;
+	}
 	
 }

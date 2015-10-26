@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -18,6 +19,7 @@ public class MainActivity extends FragmentActivity {
 	 * pager 控件，用来处理动画和允许水平滑动来获得之前和之后的页面
 	 */
 	private ViewPager mPager=null;
+	
 
 	/**
 	 * 为上面的pager 控件提供页面

@@ -9,9 +9,23 @@
     tools:context="com.demo2.AboutActivity" >
 
     <TextView
+        android:id="@+id/text_authName"
+        android:singleLine="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:text="@string/author_info" />
+    <ImageView
+        android:id="@+id/text_authPic" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_authName"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/author_info"
+        android:background="@drawable/xcw"
+        />
 
     
 </RelativeLayout>

@@ -14,16 +14,13 @@
   limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
     <!-- Dummy content. -->
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp">
 
         <TextView android:id="@+id/weekday"
             style="?android:textAppearanceLarge"
@@ -32,13 +29,15 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
 
-        <TextView style="?android:textAppearanceMedium"
-            android:id="@+id/courseDetail"
-            android:lineSpacingMultiplier="1.2"
+        <TextView android:id="@+id/term_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lorem_ipsum" />
-
+            android:text="@string/course_term_info"
+             />
+		<ListView 
+		    android:id="@+id/listview_course"
+		    android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+		    />
     </LinearLayout>
 
-</ScrollView>
