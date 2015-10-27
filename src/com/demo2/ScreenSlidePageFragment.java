@@ -31,6 +31,7 @@ public class ScreenSlidePageFragment extends Fragment{
 	public static final String LOCATION="location";
 	public static final String COURSENAME="courseName";
 	public static final String TEACHERNAME="teacherName";
+	public static final String[] COURSETERM={COURSEID, COURSENAME, LOCATION, TEACHERNAME};
 	/**
 	 * 这个框架的页面的数量，
 	 */
@@ -84,14 +85,11 @@ public class ScreenSlidePageFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				String []com=((TextView)view).getText().toString().split(" ");
 				Intent intent=new Intent(getActivity(), SetCourseActivity.class);
-				intent.putExtra(WEEKDAY,  ""+mPageNumber);
-				intent.putExtra(COURSEID, com[0]);
-				intent.putExtra(COURSENAME, com[1]);
-				intent.putExtra(LOCATION, com[2]);
-				intent.putExtra(TEACHERNAME, com[3]);
-				
+				String []com=((TextView)view).getText().toString().split(" ");
+				for(int i=0;i<com.length;i++){
+					intent.putExtra(COURSETERM[i],com[i]);
+				}
 				startActivity(intent);
 			}
 			

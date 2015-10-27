@@ -1,5 +1,8 @@
 package com.demo2;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -45,7 +48,17 @@ public class MainActivity extends FragmentActivity {
                 invalidateOptionsMenu();
             }
         });
-		
+		//设置启动的页面为今天
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date(System.currentTimeMillis()));
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		if(dayOfWeek==1){
+			dayOfWeek=6;
+		}
+		else{
+			dayOfWeek=dayOfWeek-2;
+		}
+		mPager.setCurrentItem(dayOfWeek);
 	}
 
 	@Override
