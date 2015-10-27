@@ -9,6 +9,7 @@
     tools:context="com.demo2.SetCourseActivity" >
 
     <GridLayout 
+        android:id="@+id/grid_layout"
         android:layout_width="fill_parent"  
 	    android:layout_height="wrap_content"  
 	    android:orientation="vertical"  
@@ -39,47 +40,67 @@
 		        android:layout_height="wrap_content"
 		        />
 	        <TextView
-			        android:id="@+id/id_select_Loacation_text"
-			        android:layout_width="wrap_content"
-			        android:layout_height="match_parent"
-			        android:textSize="20sp"
-			        android:text="@string/select_location_text" />
+		        android:id="@+id/id_select_Loacation_text"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:textSize="20sp"
+		        android:text="@string/select_location_text" />
 	        <EditText 
 	            android:id="@+id/id_location_editText"
 	            android:layout_width="match_parent"
 			    android:layout_height="match_parent"
 			    android:inputType="text"
+			    android:maxLength="10"
 	            />
 	         <TextView
-			        android:id="@+id/id_select_courseName_text"
-			        android:layout_width="wrap_content"
-			        android:layout_height="match_parent"
-			        android:textSize="20sp"
-			        android:text="@string/select_courseName_text" />
+		        android:id="@+id/id_select_courseName_text"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:textSize="20sp"
+		        android:text="@string/select_courseName_text" />
 	        <EditText 
 	            android:id="@+id/id_courseName_editText"
 	            android:layout_width="match_parent"
 			    android:layout_height="match_parent"
 			    android:inputType="text"
+			    android:maxLength="10"
 	            />
 	        <TextView
-			        android:id="@+id/id_select_teacherName_text"
-			        android:layout_width="wrap_content"
-			        android:layout_height="match_parent"
-			        android:textSize="20sp"
-			        android:text="@string/select_teacherName_text" />
+		        android:id="@+id/id_select_teacherName_text"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:textSize="20sp"
+		        android:text="@string/select_teacherName_text" />
 	        <EditText 
 	            android:id="@+id/id_teacherName_editText"
 	            android:layout_width="match_parent"
 			    android:layout_height="match_parent"
 			    android:inputType="text"
+			    android:maxLength="5"
 	            />
         </GridLayout>
-        <Button 
-            android:id="@+id/id_save_btn"
-            android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/save"
-			android:layout_alignParentBottom="true"
-            />
+
+	<LinearLayout
+	    android:layout_marginBottom="5dp"
+	    android:layout_height="match_parent"
+	    android:layout_width="fill_parent"
+	    android:layout_alignParentBottom="true"
+	    android:layout_below="@id/grid_layout"
+	     >
+	
+		<Button 
+		android:id="@+id/id_save_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/save"
+		android:layout_weight="1"/>
+		<Button 
+		android:id="@+id/id_delete_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/delete"
+		android:layout_weight="1"/>
+	    
+	</LinearLayout>
+
 </RelativeLayout>

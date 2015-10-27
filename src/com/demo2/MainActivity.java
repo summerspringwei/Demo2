@@ -20,7 +20,6 @@ public class MainActivity extends FragmentActivity {
 	 */
 	private ViewPager mPager=null;
 	
-
 	/**
 	 * 为上面的pager 控件提供页面
 	 */

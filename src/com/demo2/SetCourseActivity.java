@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,14 +35,18 @@ public class SetCourseActivity extends Activity {
 	private SpinnerAdapter myWeekDayAdapter;
 	private SpinnerAdapter myCourseDayAdapter;
 	private Button btn_save=null;
+	private Button btn_delete=null;
 	private EditText text_location=null;
 	private EditText text_courseName=null;
 	private EditText text_teacherName=null;
+	private String tempWeekDay=null;
+	private String tempCourseId=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_course);
-		
+		tempWeekDay=getIntent().getStringExtra(ScreenSlidePageFragment.WEEKDAY);
+		tempCourseId=getIntent().getStringExtra(ScreenSlidePageFragment.COURSEID);
 		
 		//初始化下拉菜单
 		setSpinner();
@@ -53,7 +58,6 @@ public class SetCourseActivity extends Activity {
 	 */
 	@SuppressWarnings("unchecked")
 	public void setSpinner(){
-		
 		list.add(getResources().getString(R.string.Monday));
 		list.add(getResources().getString(R.string.Tuesday));
 		list.add(getResources().getString(R.string.Wednesday));
@@ -66,6 +70,10 @@ public class SetCourseActivity extends Activity {
 		((ArrayAdapter<String>) myWeekDayAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		myWeekDaySpinner.setAdapter(myWeekDayAdapter);
 		
+		//如果是点击ListView item传过来值，则设置spinner的默认值
+		if(tempWeekDay!=null){
+			myWeekDaySpinner.setSelection(Integer.parseInt(tempWeekDay), true);
+		}
 		String courseId[]={"1","2","3","4","5","6","7"};
 		for(String sc:courseId){
 			courseList.add(sc);
@@ -74,6 +82,9 @@ public class SetCourseActivity extends Activity {
 		myCourseDayAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,courseList);
 		((ArrayAdapter<String>) myCourseDayAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		myCourseSpinner.setAdapter(myCourseDayAdapter);
+		if(tempCourseId!=null){
+			myCourseSpinner.setSelection(Integer.parseInt(tempCourseId)-1, true);
+		}
 	}
 	
 	/*
@@ -81,11 +92,13 @@ public class SetCourseActivity extends Activity {
 	 * */
 	public void bindView(){
 		btn_save=(Button)findViewById(R.id.id_save_btn);
+		btn_delete=(Button)findViewById(R.id.id_delete_btn);
 		text_location=(EditText)findViewById(R.id.id_location_editText);
 		text_teacherName=(EditText)findViewById(R.id.id_teacherName_editText);
 		text_courseName=(EditText)findViewById(R.id.id_courseName_editText);
 		
 		btn_save.setOnClickListener(new saveCourseListener());
+		btn_delete.setOnClickListener(new deleteCourseListener());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,27 +119,14 @@ public class SetCourseActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	//保存course（如果之前存在，则覆盖）
 	class saveCourseListener implements View.OnClickListener{
 
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			String weekDay=myWeekDaySpinner.getSelectedItem().toString();
-			String courseId=myCourseSpinner.getSelectedItem().toString();
-			String location=text_location.getText().toString();
-			String courseName=text_courseName.getText().toString();
-			String teacherName=text_teacherName.getText().toString();
-			
-			String []hanzi2num={"一","二","三","四","五","六","日"};
-			int wd=1;
-			for(int i=0;i<hanzi2num.length;i++){
-				if(weekDay.contains(hanzi2num[i]))
-					wd=i+1;
-			}
-			//保存course（如果之前存在，则覆盖）
-			Course course=new Course(wd, Integer.parseInt(courseId), courseName, teacherName, location);
 			DBCourseDao dbCouseDao=new DBCourseDao(getApplicationContext());
-			dbCouseDao.save(course);
+			dbCouseDao.save(bindData2Course());
 			//抛出toast提醒
 			Toast.makeText(getApplicationContext(), getString(R.string.toast_save), Toast.LENGTH_SHORT).show();
 			myNotify("课程表提示","保存课程成功","请按时上课哦~点击继续添加课程");
@@ -134,6 +134,33 @@ public class SetCourseActivity extends Activity {
 		
 	}
 	
+	private class deleteCourseListener implements View.OnClickListener{
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			DBCourseDao dbCouseDao=new DBCourseDao(getApplicationContext());
+			dbCouseDao.delete(bindData2Course());
+			Toast.makeText(getApplicationContext(), getString(R.string.toast_delete), Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+	
+	//获取控件上的数据，绑定到Course对象并返回
+	private Course bindData2Course(){
+		String weekDay=myWeekDaySpinner.getSelectedItem().toString();
+		String courseId=myCourseSpinner.getSelectedItem().toString();
+		String location=text_location.getText().toString();
+		String courseName=text_courseName.getText().toString();
+		String teacherName=text_teacherName.getText().toString();
+		String []hanzi2num={"一","二","三","四","五","六","日"};
+		int wd=1;
+		for(int i=0;i<hanzi2num.length;i++){
+			if(weekDay.contains(hanzi2num[i]))
+				wd=i+1;
+		}
+		Course course=new Course(wd, Integer.parseInt(courseId), courseName, teacherName, location);
+		return course;
+	}
 	private void myNotify(CharSequence tickerText, CharSequence contentTitle,CharSequence contentText){
 		String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);

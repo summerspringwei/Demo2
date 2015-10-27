@@ -60,7 +60,7 @@ public class DBCourseDao {
 	 * */
 	public void delete(Course course){
 		SQLiteDatabase db=dbCourseOpenHelper.getReadableDatabase();
-		db.execSQL("delete from course where weekDay=?,courseId=?",new Object[]{course.weekDay,course.courseId});
+		db.execSQL("delete from course where weekDay=? and courseId=?",new Object[]{course.weekDay,course.courseId});
 		db.close();
 	}
 	

@@ -18,7 +18,9 @@
     <string name="select_courseName_text">课程名称</string>
     <string name="select_teacherName_text">老师姓名</string>
     <string name="save">保存</string>
+    <string name="delete">删除</string>
     <string name="toast_save">课程保存成功</string>
+    <string name="toast_delete">课程删除成功</string>
     <string name="course_term_info">时间\t\t课程名称\t\t地点\t\t教师姓名</string>
     
     

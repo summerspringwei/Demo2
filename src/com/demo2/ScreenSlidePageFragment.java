@@ -5,12 +5,15 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ public class ScreenSlidePageFragment extends Fragment{
 	 * The argument key for the page number this fragment represents.
 	 */
 	public static final String ARG_PAGE="page";
+	public static final String WEEKDAY="weekDay";
+	public static final String COURSEID="courseId";
 	/**
 	 * 这个框架的页面的数量，
 	 */
@@ -30,7 +35,8 @@ public class ScreenSlidePageFragment extends Fragment{
 	ListView list_course=null;
 	String []str_course=null;
 	
-	public ScreenSlidePageFragment(){};
+	public ScreenSlidePageFragment(){
+	};
 	
 	/**
 	 * 这个框架页面的工厂方法，为给定的页面号构造一个新的框架
@@ -67,24 +73,37 @@ public class ScreenSlidePageFragment extends Fragment{
 			}
 		});
 		
-		//获取ListView
+		//获取ListView，设置点击item的事件监听
 		list_course=(ListView)rootView.findViewById(R.id.listview_course);
+		list_course.setOnItemClickListener(new OnItemClickListener() {
+
+			//点击item后，跳转到设置课程的activity，将weekDay和courseId发送过去
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(getActivity(), SetCourseActivity.class);
+				intent.putExtra(WEEKDAY,  ""+mPageNumber);
+				intent.putExtra(COURSEID, ((TextView)view).getText().subSequence(0, 1));
+				startActivity(intent);
+			}
+			
+		});
 		//声明Adapter
 		ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1);
 		TextView text_weekDay=(TextView)rootView.findViewById(R.id.weekday);
 		
+		//设置每一页的标题 星期一、星期二、。。
 		String []hanzi2num={"一","二","三","四","五","六","日"};
 		text_weekDay.setText(getString(R.string.week)+hanzi2num[mPageNumber]);
-		Log.v("PageNumber", ""+mPageNumber);
+		//把排序后的课程绑定到Adapter
 		for(int j=0;j<courseList.size();j++){
 			Course c=courseList.get(j);
-			Log.v("course", c.toString());
 			if(c.weekDay==mPageNumber+1){
 				//Adapter增加数据
-				myAdapter.add(c.toString().substring(1));
+				myAdapter.add(c.toString().substring(2));
 			}
 		}
-		//设置Adapter
+		//ListView设置Adapter
 		list_course.setAdapter(myAdapter);
 		//清空Adapter 。。不需要清空~每个fragment的数据是单独的
 		//myAdapter.clear();
