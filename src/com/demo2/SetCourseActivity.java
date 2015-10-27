@@ -39,20 +39,31 @@ public class SetCourseActivity extends Activity {
 	private EditText text_location=null;
 	private EditText text_courseName=null;
 	private EditText text_teacherName=null;
+	//用于接收ScreenSlideActivity传递过来的数据
 	private String tempWeekDay=null;
 	private String tempCourseId=null;
+	private String tempCourseName=null;
+	private String tempTeacherName=null;
+	private String tempLoacation=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_course);
-		tempWeekDay=getIntent().getStringExtra(ScreenSlidePageFragment.WEEKDAY);
-		tempCourseId=getIntent().getStringExtra(ScreenSlidePageFragment.COURSEID);
-		
+		//接收数据
+		acceptData();
 		//初始化下拉菜单
 		setSpinner();
 		//绑定控件
 		bindView();
 	}
+	private void acceptData(){
+		tempWeekDay=getIntent().getStringExtra(ScreenSlidePageFragment.WEEKDAY);
+		tempCourseId=getIntent().getStringExtra(ScreenSlidePageFragment.COURSEID);
+		tempTeacherName=getIntent().getStringExtra(ScreenSlidePageFragment.TEACHERNAME);
+		tempCourseName=getIntent().getStringExtra(ScreenSlidePageFragment.COURSENAME);
+		tempLoacation=getIntent().getStringExtra(ScreenSlidePageFragment.LOCATION);
+	}
+	
 	/**
 	 * 初始化日期和节数选择器
 	 */
@@ -65,15 +76,16 @@ public class SetCourseActivity extends Activity {
 		list.add(getResources().getString(R.string.Friday));
 		list.add(getResources().getString(R.string.Saturday));
 		list.add(getResources().getString(R.string.Sunday));
+		//weekDay spinner
 		myWeekDaySpinner=(Spinner)findViewById(R.id.id_weekDay_select);
 		myWeekDayAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 		((ArrayAdapter<String>) myWeekDayAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		myWeekDaySpinner.setAdapter(myWeekDayAdapter);
-		
 		//如果是点击ListView item传过来值，则设置spinner的默认值
 		if(tempWeekDay!=null){
 			myWeekDaySpinner.setSelection(Integer.parseInt(tempWeekDay), true);
 		}
+		//courseId spinner
 		String courseId[]={"1","2","3","4","5","6","7"};
 		for(String sc:courseId){
 			courseList.add(sc);
@@ -96,6 +108,10 @@ public class SetCourseActivity extends Activity {
 		text_location=(EditText)findViewById(R.id.id_location_editText);
 		text_teacherName=(EditText)findViewById(R.id.id_teacherName_editText);
 		text_courseName=(EditText)findViewById(R.id.id_courseName_editText);
+		
+		if(tempLoacation!=null){text_location.setText(tempLoacation);}
+		if(tempTeacherName!=null){text_teacherName.setText(tempTeacherName);}
+		if(tempCourseName!=null){text_courseName.setText(tempCourseName);}
 		
 		btn_save.setOnClickListener(new saveCourseListener());
 		btn_delete.setOnClickListener(new deleteCourseListener());
