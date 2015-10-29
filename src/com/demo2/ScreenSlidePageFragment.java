@@ -73,10 +73,13 @@ public class ScreenSlidePageFragment extends Fragment{
 			@Override
 			public int compare(Course lhs, Course rhs) {
 				// TODO Auto-generated method stub
-				return (lhs.getOrder()<rhs.getOrder()?1:0);
+				return (lhs.getOrder()<rhs.getOrder()?-1:1);
 			}
 		});
 		
+		for(int i=0;i<courseList.size();i++){
+			Log.v("course"+mPageNumber, courseList.get(i).toString());
+		}
 		//获取ListView，设置点击item的事件监听
 		list_course=(ListView)rootView.findViewById(R.id.listview_course);
 		list_course.setOnItemClickListener(new OnItemClickListener() {

@@ -109,9 +109,9 @@ public class SetCourseActivity extends Activity {
 		text_teacherName=(EditText)findViewById(R.id.id_teacherName_editText);
 		text_courseName=(EditText)findViewById(R.id.id_courseName_editText);
 		
-		if(tempLoacation!=null){text_location.setText(tempLoacation);}
-		if(tempTeacherName!=null){text_teacherName.setText(tempTeacherName);}
-		if(tempCourseName!=null){text_courseName.setText(tempCourseName);}
+		if(tempLoacation!=null){text_location.setText(tempLoacation.trim());}
+		if(tempTeacherName!=null){text_teacherName.setText(tempTeacherName.trim());}
+		if(tempCourseName!=null){text_courseName.setText(tempCourseName.trim());}
 		
 		btn_save.setOnClickListener(new saveCourseListener());
 		btn_delete.setOnClickListener(new deleteCourseListener());
@@ -163,11 +163,12 @@ public class SetCourseActivity extends Activity {
 	
 	//获取控件上的数据，绑定到Course对象并返回
 	private Course bindData2Course(){
-		String weekDay=myWeekDaySpinner.getSelectedItem().toString();
-		String courseId=myCourseSpinner.getSelectedItem().toString();
-		String location=text_location.getText().toString();
-		String courseName=text_courseName.getText().toString();
-		String teacherName=text_teacherName.getText().toString();
+		//.trim()移除文本框前后的空格 ps：因为Course.toString()方法使用空格来分别每个字段，所以要把用户输入的空格去掉
+		String weekDay=myWeekDaySpinner.getSelectedItem().toString().trim();
+		String courseId=myCourseSpinner.getSelectedItem().toString().trim();
+		String location=text_location.getText().toString().trim();
+		String courseName=text_courseName.getText().toString().trim();
+		String teacherName=text_teacherName.getText().toString().trim();
 		String []hanzi2num={"一","二","三","四","五","六","日"};
 		int wd=1;
 		for(int i=0;i<hanzi2num.length;i++){

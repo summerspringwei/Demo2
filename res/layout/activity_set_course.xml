@@ -89,17 +89,19 @@
 	     >
 	
 		<Button 
-		android:id="@+id/id_save_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/save"
-		android:layout_weight="1"/>
-		<Button 
-		android:id="@+id/id_delete_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/delete"
-		android:layout_weight="1"/>
+			android:id="@+id/id_save_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			style="?android:attr/buttonBarStyle"
+			android:text="@string/save"
+			android:layout_weight="1"/>
+		<Button
+			android:id="@+id/id_delete_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			style="?android:attr/buttonBarStyle"
+			android:text="@string/delete"
+			android:layout_weight="1"/>
 	    
 	</LinearLayout>
 

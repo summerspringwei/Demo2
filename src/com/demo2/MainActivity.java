@@ -49,16 +49,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 		//设置启动的页面为今天
-		Calendar c = Calendar.getInstance();
-		c.setTime(new Date(System.currentTimeMillis()));
-		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-		if(dayOfWeek==1){
-			dayOfWeek=6;
-		}
-		else{
-			dayOfWeek=dayOfWeek-2;
-		}
-		mPager.setCurrentItem(dayOfWeek);
+		mPager.setCurrentItem(getWeekday());
 	}
 
 	@Override
@@ -74,6 +65,7 @@ public class MainActivity extends FragmentActivity {
                         ? R.string.action_finish
                         : R.string.action_next);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        
 		return true;
 	}
 
@@ -102,7 +94,12 @@ public class MainActivity extends FragmentActivity {
 		}
 
 	}
-	
+	//设置完课程之后，返回MainActivity更新当前页面的数据（学习android生命周期的好处）
+	@Override
+	public void onResume(){
+		super.onResume();
+		mPager.setCurrentItem(getWeekday());
+	}
 	/**
      * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
      * sequence.
@@ -121,5 +118,17 @@ public class MainActivity extends FragmentActivity {
         public int getCount() {
             return NUM_PAGES;
         }
+    }
+    public static int getWeekday(){
+    	Calendar c = Calendar.getInstance();
+		c.setTime(new Date(System.currentTimeMillis()));
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		if(dayOfWeek==1){
+			dayOfWeek=6;
+		}
+		else{
+			dayOfWeek=dayOfWeek-2;
+		}
+		return dayOfWeek;
     }
 }
